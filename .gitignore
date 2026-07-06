@@ -1,0 +1,7 @@
+# Dependency folders
+node_modules/
+
+# Local build artifacts / compiler logs
+*.log
+.DS_Store
+Thumbs.db

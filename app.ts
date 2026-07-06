@@ -97,6 +97,7 @@ const quizQuestions = [
         funcA: "Ti",
         funcB: "Ni"
     },
+
     // === PART 2: CROSS-DIMENSION PAIRINGS ===
     {
         id: 13,
@@ -227,6 +228,7 @@ const quizQuestions = [
         funcB: "Fi"
     }
 ];
+
 // Map MBTI types to their top 2 functions
 const mbtiArchetpes = {
     INTJ: { dom: "Ni", aux: "Te" }, INFJ: { dom: "Ni", aux: "Fe" },
@@ -238,74 +240,90 @@ const mbtiArchetpes = {
     ISTP: { dom: "Ti", aux: "Se" }, ISFP: { dom: "Fi", aux: "Se" },
     ESTP: { dom: "Se", aux: "Ti" }, ESFP: { dom: "Se", aux: "Fi" }
 };
+
+
 //Tracking state
 let currentQuestionIndex = 0;
 const scores = {
-    Ni: 0, Ne: 0,
-    Si: 0, Se: 0,
-    Fi: 0, Fe: 0,
-    Ti: 0, Te: 0,
+    Ni: 0, Ne: 0, 
+    Si: 0, Se: 0, 
+    Fi: 0, Fe: 0, 
+    Ti: 0, Te: 0, 
 };
+
 // Function to update question display in HTML
 function displayQuestion() {
     const currentQuestion = quizQuestions[currentQuestionIndex];
-    const totalQuestions = quizQuestions.length;
-    const progressPercent = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    const totalQuestions = quizQuestions.length
+    const progressPercent = ((currentQuestionIndex + 1) / totalQuestions) * 100
+
     //Update text content
-    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
-    document.getElementById('question-text').innerText = currentQuestion.scenario;
-    document.getElementById('btn-A').innerText = currentQuestion.optionA;
-    document.getElementById('btn-B').innerText = currentQuestion.optionB;
+    document.getElementById('progress-text')!.innerText = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+    document.getElementById('question-text')!.innerText = currentQuestion!.scenario;
+    document.getElementById('btn-A')!.innerText = currentQuestion!.optionA;
+    document.getElementById('btn-B')!.innerText = currentQuestion!.optionB;
+
     // Animate progress bar dynamically
-    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    document.getElementById('progress-bar')!.style.width = `${progressPercent}%`;
 }
+
 // Function to handle the user click
-function selectOption(choice) {
+function selectOption(choice: string) {
     const currentQuestion = quizQuestions[currentQuestionIndex];
     const totalQuestions = quizQuestions.length;
+
     // Award point to cognitive function based on answer
     if (choice == 'A') {
-        scores[currentQuestion.funcA]++;
+        scores[currentQuestion!.funcA as keyof typeof scores]++;
+    } else {
+        scores[currentQuestion!.funcB as keyof typeof scores]++;
     }
-    else {
-        scores[currentQuestion.funcB]++;
-    }
+
     // Move to next question (or show results if finished)
     currentQuestionIndex++;
+
     if (currentQuestionIndex < totalQuestions) {
         displayQuestion();
-    }
-    else {
+    } else {
         showResults();
     }
 }
-window.selectOption = selectOption;
+
+(window as any).selectOption = selectOption;
+
 // Function to calculate MBTI type
 function calculateMBTI() {
     // Sort functions from highest to lowest scored and pick the top 2
     const sortedFunctions = Object.entries(scores)
-        .sort((a, b) => b[1] - a[1])
-        .map(entry => entry[0]);
+    .sort((a, b) => b[1] - a[1])
+    .map(entry => entry[0]);
+
     const highest = sortedFunctions[0];
     const secondHighest = sortedFunctions[1];
+
     // Assigning the final MBTI type
     let finalType = 'Unknown';
     for (const [type, stack] of Object.entries(mbtiArchetpes)) {
         if (stack.dom == highest) {
             finalType = type;
+
             if (stack.aux == secondHighest) {
                 break;
             }
         }
+
     }
+
     return [highest, secondHighest, finalType];
 }
+
 // Function to show results once over
 function showResults() {
     // Run calculation
     calculateMBTI();
     const [highest, secondHighest, finalType] = calculateMBTI();
-    document.getElementById('quiz-container').innerHTML = `
+
+    document.getElementById('quiz-container')!.innerHTML = `
         <div class="mb-8 flex flex-col items-center">
             <h1 class="text-4xl font-bold tracking-wide text-indigo-800 mb-6">
                 What is your MBTI?
@@ -338,7 +356,7 @@ function showResults() {
             </div>
         </div>
 
-    `;
+    `
 }
+
 displayQuestion();
-export {};
