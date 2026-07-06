@@ -1,0 +1,24 @@
+{
+  "name": "mbti-quiz",
+  "version": "1.0.0",
+  "description": "This simple project is a personality quiz that assesses the user's personality (i.e. MBTI type) by presenting them with 28 different scenarios and grades their Jungian cognitive functions and stack to identify the MBTI type that best correlates to their general personality.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manatunga/mbti-quiz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/manatunga/mbti-quiz/issues"
+  },
+  "homepage": "https://github.com/manatunga/mbti-quiz#readme",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
