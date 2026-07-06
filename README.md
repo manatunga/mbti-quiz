@@ -3,6 +3,8 @@ This simple project is a personality quiz that assesses the user's personality (
 
 The aim of this side project is to mainly consolidate my JavaScript fundamentals, whilst diving into utilising TypeScript's strict static typing and Tailwind CSS's utility classes to style the quiz's frontend.
 
+**Live Demo** : Check out the live demo 👉[here](https://manatunga.github.io/mbti-quiz/)
+
 ## 🛠️ Tech Stack
 - HTML5, Tailwind CSS, JavaScript, TypeScript
 
