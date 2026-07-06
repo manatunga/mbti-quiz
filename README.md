@@ -1,5 +1,4 @@
 # mbti-quiz: a small personality test
-![Screenshot of demo](readme-pages/demo.png)
 This simple project is a personality quiz that assesses the user's personality (i.e. MBTI type) by presenting them with 28 different scenarios and grades their Jungian cognitive functions and stack to identify the MBTI type that best correlates to their general personality.
 
 The aim of this side project is to mainly consolidate my JavaScript fundamentals, whilst diving into utilising TypeScript's strict static typing and Tailwind CSS's utility classes to style the quiz's frontend.
